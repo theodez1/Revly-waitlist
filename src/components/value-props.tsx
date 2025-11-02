@@ -5,27 +5,32 @@ import { useEffect, useRef, useState } from "react";
 export default function ValueProps() {
 	const [isVisible, setIsVisible] = useState(false);
 	const sectionRef = useRef<HTMLElement>(null);
+	const observerRef = useRef<IntersectionObserver | null>(null);
 
 	useEffect(() => {
-		const observer = new IntersectionObserver(
+		observerRef.current = new IntersectionObserver(
 			([entry]) => {
-				if (entry.isIntersecting) {
+				if (entry.isIntersecting && !isVisible) {
 					setIsVisible(true);
+					// Arrêter d'observer après la première apparition
+					if (observerRef.current && sectionRef.current) {
+						observerRef.current.unobserve(sectionRef.current);
+					}
 				}
 			},
 			{ threshold: 0.1 }
 		);
 
 		if (sectionRef.current) {
-			observer.observe(sectionRef.current);
+			observerRef.current.observe(sectionRef.current);
 		}
 
 		return () => {
-			if (sectionRef.current) {
-				observer.unobserve(sectionRef.current);
+			if (observerRef.current && sectionRef.current) {
+				observerRef.current.unobserve(sectionRef.current);
 			}
 		};
-	}, []);
+	}, [isVisible]);
 
 	return (
 		<section ref={sectionRef} className="mx-auto max-w-6xl w-full py-12 sm:px-0 px-4">
