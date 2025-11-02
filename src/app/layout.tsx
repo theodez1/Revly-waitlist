@@ -18,6 +18,7 @@ const interTight = Inter_Tight({
 });
 
 export const metadata: Metadata = {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://revly-waitlist.vercel.app'),
     title: "Revly — Enregistrez et partagez vos sorties",
     description:
         "Pensé pour les passionnés de la route. Suivi GPS précis, statistiques avancées et découverte de spots et routes d'exception.",
