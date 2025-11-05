@@ -35,7 +35,7 @@ export default function ValueProps() {
 	return (
 		<section ref={sectionRef} className="mx-auto max-w-6xl w-full py-12 sm:px-0 px-4">
 			{/* Section title */}
-			<div className="text-center">
+			<div className={`text-center mb-4 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity 300ms ease-out' }}>
 				<h2 className="text-3xl md:text-4xl font-bold text-foreground">
 					Une expérience pensée pour vous
 				</h2>
@@ -46,7 +46,7 @@ export default function ValueProps() {
 
 			{/* Mockup de l'app */}
 			<div className="flex justify-center mb-8 relative">
-				<div className={`relative w-full max-w-4xl transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+				<div className={`relative w-full max-w-4xl ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ transition: 'opacity 300ms ease-out' }}>
 					{/* Enhanced glow effect behind mockup */}
 					<div className="absolute inset-0 bg-gradient-to-r from-[#1E3A8A]/20 via-[#1E3A8A]/40 to-[#1E3A8A]/20 blur-[120px] rounded-full transform scale-110 -z-10"></div>
 					<div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#1E3A8A]/25 blur-[80px] rounded-full -z-10 animate-pulse"></div>

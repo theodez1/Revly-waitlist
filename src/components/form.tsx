@@ -47,31 +47,15 @@ export default function WaitlistForm({ onSuccessChange }: FormProps) {
       const promise = new Promise((resolve, reject) => {
         const { name, email } = formData;
 
-        fetch("/api/mail", {
-          cache: "no-store",
+        // Sauvegarde directement dans Notion (email de bienvenue désactivé)
+        fetch("/api/notion", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ firstname: name, email }),
+          body: JSON.stringify({ name, email }),
         })
-          .then((mailResponse) => {
-            if (!mailResponse.ok) {
-              reject("Email sending failed");
-              return null;
-            }
-
-            return fetch("/api/notion", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ name, email }),
-            });
-          })
           .then((notionResponse) => {
-            if (!notionResponse) return;
-
             if (!notionResponse.ok) {
               reject("Save failed");
             } else {
@@ -107,11 +91,8 @@ export default function WaitlistForm({ onSuccessChange }: FormProps) {
           return "Merci de rejoindre la liste d’attente 🎉";
         },
         error: (error) => {
-          if (error === "Email sending failed") {
-            return "Échec d’envoi de l’email. Réessayez 😢.";
-          }
           if (error === "Save failed") {
-            return "Échec d’enregistrement de vos infos. Réessayez 😢.";
+            return "Échec d'enregistrement de vos infos. Réessayez 😢.";
           }
           return "Une erreur est survenue. Réessayez 😢.";
         },

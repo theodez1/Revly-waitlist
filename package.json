@@ -6,8 +6,7 @@
     "dev": "NODE_OPTIONS='--max-old-space-size=4096' next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "email": "email dev --dir src/emails"
+    "lint": "next lint"
   },
   "dependencies": {
     "@notionhq/client": "^3.0.1",
