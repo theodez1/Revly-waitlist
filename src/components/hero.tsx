@@ -21,7 +21,7 @@ export default function Hero({ waitlistPeople }: { waitlistPeople: number }) {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1E3A8A]" />
           </span>
           <p className="uppercase text-sm font-medium">
-            DISPONIBLE DÉBUT 2025
+            BIENTOT DISPONIBLE !
           </p>
         </div>
       </div>
